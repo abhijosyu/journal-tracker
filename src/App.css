@@ -1,0 +1,16 @@
+body {
+  font-family: "Lexend Deca", sans-serif;
+  background-image: url("../public/Images/Grid.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}

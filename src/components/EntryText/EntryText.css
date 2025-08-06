@@ -1,0 +1,24 @@
+.entryText {
+  border: none;
+  font-size: 20px;
+  background: transparent;
+  margin: 0;
+  padding-left: 8px;
+  width: 100%;
+  height: 100%;
+  display: inline-table;
+}
+
+.entryText:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.entryTextContainer textarea {
+  text-align: left;
+  padding-top: 20px;
+  font-family: "Lexend Deca", sans-serif;
+  display: inline-table;
+  line-height: 2;
+}

@@ -1,0 +1,18 @@
+.entryButtons button {
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.entryButtons .starButtonFilled {
+  background-image: url("/Images/StarFilled.png");
+}
+
+.entryButtons .starButtonUnfilled {
+  background-image: url("/Images/StarUnfilled.png");
+}

@@ -1,0 +1,30 @@
+.entryTitleText {
+  border: none;
+  background: transparent;
+  resize: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entryTitle textarea:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.entryTitle textarea {
+  text-align: center;
+  padding-top: 0.5rem;
+  font-family: "Lexend Deca", sans-serif;
+}
+
+.entryTitleText {
+  width: 100%;
+  height: 100%;
+  height: auto;
+  display: inline-table;
+}
+
+.entryTitle {
+  width: 100%;
+}

@@ -1,0 +1,16 @@
+.MainPage {
+  display: flex;
+  flex: 1;
+  gap: 0rem;
+  padding: 0;
+  margin: 0;
+}
+
+.MainPageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 0rem;
+  margin: 0;
+  padding: 0;
+}

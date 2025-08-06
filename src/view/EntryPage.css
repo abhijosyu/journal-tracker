@@ -1,0 +1,48 @@
+.entryCenteredInfo {
+  display: grid;
+  justify-items: center;
+  gap: 0rem;
+  margin: 0;
+  padding: 0;
+}
+
+.entryCenteredInfo .entryDate {
+  font-size: 20px;
+  font-weight: 300;
+  color: grey;
+  margin-top: 0;
+  padding: 0;
+}
+
+.smallCenteredInfo {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.entryContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.entryTextContainer {
+  flex: 1;
+  min-width: 0;
+}
+.entryPage {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  min-height: calc(100vh - 90px);
+}
+
+.entryPageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 0rem;
+  margin: 0;
+  padding: 0;
+}

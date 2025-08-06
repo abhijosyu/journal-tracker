@@ -1,0 +1,126 @@
+.headerContainer {
+  height: 75px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding: 0px;
+  display: flex;
+}
+
+.headerCenter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.headerRight {
+  margin-top: 10px;
+  position: absolute;
+  left: 95%;
+  transform: translateX(-50%);
+}
+
+.headerLeft {
+  margin-top: 20px;
+  position: absolute;
+  left: 5.5%;
+  transform: translateX(-50%);
+}
+
+.headerLeftButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.headerButtonSort {
+  font-size: 18px;
+
+  width: 90px;
+  height: 40px;
+  font-family: "Lexend Deca", sans-serif;
+  color: rgba(115, 42, 102, 0.564);
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(229, 172, 243, 0.429);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(115, 42, 102, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transform: translateY() 0.3s ease;
+  scale: 0.95;
+}
+
+@keyframes headerFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.headerFadeInSide {
+  animation: headerFadeIn 0.5s ease-in-out;
+}
+
+.headerButtonSort:hover {
+  box-shadow: 0 7px 10px rgba(181, 122, 189, 0.531);
+  transform: translateY(-4px);
+  scale: 1;
+}
+
+.headerButtonFilter {
+  font-size: 18px;
+
+  width: 90px;
+  height: 40px;
+  font-family: "Lexend Deca", sans-serif;
+  color: rgba(57, 42, 115, 0.564);
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(172, 172, 243, 0.429);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(57, 42, 115, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transform: translateY() 0.3s ease;
+  scale: 0.95;
+}
+
+.headerButtonFilter:hover {
+  box-shadow: 0 7px 10px rgba(122, 125, 189, 0.531);
+  transform: translateY(-4px);
+  scale: 1;
+}
+
+.headerContainer {
+  box-shadow: 10px 0px 2em rgba(7, 23, 60, 0.5);
+  /* From https://css.glass */
+  background: rgba(181, 204, 235, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(134, 175, 205, 0.3);
+}
+
+.headerAiChatbot {
+  background-image: url("/Images/AIButton.png");
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.headerRight button {
+  transition: filter 0.8s ease, scale 0.3s ease;
+  filter: drop-shadow(2px 4px 6px rgba(188, 15, 15, 0));
+  scale: 1;
+}
+
+.headerRight button:hover {
+  filter: drop-shadow(2px 4px 6px rgb(216, 18, 199));
+  scale: 1.1;
+}

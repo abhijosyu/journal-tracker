@@ -1,0 +1,90 @@
+.journalEntriesContainer {
+  min-height: 400px;
+  height: auto;
+}
+
+.journalEntriesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 290px;
+  gap: 2rem 0.25rem;
+  margin-left: 10px;
+}
+
+.JournalBox {
+  width: 200px;
+  height: 290px;
+  border-radius: 20px;
+  border: 1px solid rgb(79, 11, 57);
+  overflow: hidden;
+  scale: 1;
+  box-shadow: 0 0 0em rgba(112, 37, 170, 0.703);
+  margin: 0;
+  transition: background-color 0.3s ease, scale 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgb(255, 255, 255);
+  /* From https://css.glass */
+  background: rgba(244, 208, 239, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(125, 58, 137, 0.3);
+}
+.JournalBox:hover {
+  background-color: rgb(247, 243, 250);
+  scale: 1.01;
+  box-shadow: 0 0 1em rgba(112, 37, 170, 0.703);
+}
+
+.JournalBox .stars {
+  margin-left: 4px;
+}
+
+.stars img {
+  height: 20px;
+  width: 20px;
+  margin-left: 3px;
+}
+
+.JournalBox .backgroundImage {
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  object-fit: cover;
+}
+
+.JournalBox h1,
+p {
+  color: rgb(79, 11, 57);
+  margin-left: 5px;
+}
+
+.JournalBox h1 {
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-size: 30px;
+  white-space: nowrap;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.JournalBox p {
+  margin-top: 0px;
+  margin-left: px;
+  margin-bottom: 3px;
+}
+
+@keyframes boxFadeIn {
+  0% {
+    transform: translateY(5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.boxFadeIn {
+  animation: boxFadeIn 0.5s ease-in-out;
+}

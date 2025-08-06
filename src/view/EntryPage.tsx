@@ -1,0 +1,150 @@
+import Chatbot from "../components/Chatbot/Chatbot";
+import EntryRating from "../components/EntryRating/EntryRating";
+import EntryText from "../components/EntryText/EntryText";
+import EntryTitle from "../components/EntryTitle/EntryTitle";
+import Header from "../components/Header/Header";
+import "../view/EntryPage.css";
+import { useEffect, useState } from "react";
+
+interface EntryPageProps {
+  aiSummary: string;
+  entryText: string;
+  entryRating: number;
+  entryDate: Date;
+  entrySleep: number;
+  entryTitle: string;
+  onHeaderClick: () => void;
+  onEntryTitleEdit: (title: string) => void;
+  onEntryRatingEdit: (rating: number) => void;
+  onEntryTextEdit: (text: string) => void;
+  onChangeChatbot: () => void;
+  chatbotOpen: boolean;
+  userMessages: string[];
+  AIMessages: string[];
+  onSendMessage: (message: string) => void;
+  canSendMessage: boolean;
+  currentScreen: string;
+  onAnalyzeButtonClick: () => void;
+}
+
+const EntryPage: React.FC<EntryPageProps> = ({
+  aiSummary,
+  entryText,
+  entryRating,
+  entryDate,
+  entrySleep,
+  entryTitle,
+  onHeaderClick,
+  onEntryTitleEdit,
+  onEntryRatingEdit,
+  onEntryTextEdit,
+  onChangeChatbot,
+  chatbotOpen,
+  userMessages,
+  AIMessages,
+  onSendMessage,
+  canSendMessage,
+  currentScreen,
+  onAnalyzeButtonClick,
+}) => {
+  const [entryTitleCurrent, setEntryTitleCurrent] =
+    useState<string>(entryTitle);
+
+  useEffect(() => {
+    try {
+      onEntryTitleEdit(entryTitleCurrent);
+    } catch (e) {
+      throw new Error("Error: " + e);
+    }
+  }, [entryTitleCurrent]);
+
+  const [entryTextCurrent, setEntryTextCurrent] = useState<string>(entryText);
+
+  useEffect(() => {
+    console.log("changing the text");
+    onEntryTextEdit(entryTextCurrent);
+  }, [entryTextCurrent]);
+
+  useEffect(() => {
+    console.log("changing the text");
+    setEntryTitleCurrent(entryTitle);
+  }, [entryTitle]);
+
+  useEffect(() => {
+    console.log("changing the text");
+    setEntryTextCurrent(entryText);
+  }, [entryText]);
+
+  return (
+    <div className="entryPageWrapper">
+      <div className="headerContainer">
+        <Header
+          onHeaderClick={onHeaderClick}
+          onChangeChatbot={onChangeChatbot}
+          screen={currentScreen}
+          onAnalyzeButtonClick={onAnalyzeButtonClick}
+        ></Header>
+      </div>
+      <div className="entryContainer">
+        <div className="entryCenteredInfo">
+          <div className="entryTitle">
+            <EntryTitle
+              setValue={entryTitleCurrent}
+              onChange={(e) => setEntryTitleCurrent(e.target.value)}
+            />
+          </div>
+          <div className="smallCenteredInfo">
+            <h3 className="entryDate">{formatDueDate(entryDate)} | </h3>
+            <EntryRating
+              rating={entryRating}
+              onEntryRatingEdit={onEntryRatingEdit}
+            ></EntryRating>
+          </div>
+        </div>
+        <div className="entryPage" style={{ height: "100vh", width: "100%" }}>
+          <div className="entryTextContainer">
+            <EntryText
+              setValue={entryTextCurrent}
+              onChange={(e) => {
+                setEntryTextCurrent(e.target.value);
+              }}
+            />
+          </div>
+          {chatbotOpen ? (
+            <div className="chatbotContainer">
+              <Chatbot
+                userMessages={userMessages}
+                AIMessages={AIMessages}
+                onSendMessage={onSendMessage}
+                canSendMessage={canSendMessage}
+                aiSummary={aiSummary}
+              ></Chatbot>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EntryPage;
+
+const formatDueDate = (dueDate: Date): string => {
+  const today = new Date();
+
+  const timeDiff = dueDate.getDate() - today.getDate();
+
+  if (timeDiff >= 0 && timeDiff <= 7) {
+    if (timeDiff == 0) {
+      return "Today";
+    }
+    if (timeDiff == 1) {
+      return "Tomorrow";
+    }
+    return dueDate.toLocaleDateString("en-US", { weekday: "long" });
+  } else if (timeDiff == -1) {
+    return "Yesterday";
+  } else {
+    return dueDate.toLocaleDateString();
+  }
+};
