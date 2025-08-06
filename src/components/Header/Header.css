@@ -6,8 +6,44 @@
   display: flex;
 }
 
+.headerText {
+  scale: 1;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+}
+
+.headerAiChatbot {
+  scale: 1;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .headerText {
+    transform: scale(0.6);
+
+    margin-top: 5px;
+  }
+  .headerButtonSort {
+    transform: scale(0.8);
+    width: auto;
+    font-size: 20px;
+    padding: 0;
+  }
+  .headerLeft {
+    margin-top: 20px;
+    margin-left: 20px;
+    position: absolute;
+    left: 10%;
+    transform: none;
+  }
+  .headerAiChatbot {
+    background-image: url("/Images/AIButton.png");
+    transform: scale(0.8);
+  }
+}
+
 .headerCenter {
   position: absolute;
+  scale: 1;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -33,7 +69,6 @@
 
 .headerButtonSort {
   font-size: 18px;
-
   width: 90px;
   height: 40px;
   font-family: "Lexend Deca", sans-serif;
@@ -104,6 +139,7 @@
 
 .headerAiChatbot {
   background-image: url("/Images/AIButton.png");
+  scale: 1;
   width: 50px;
   height: 50px;
   background-size: contain;
@@ -112,6 +148,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
 }
 
 .headerRight button {

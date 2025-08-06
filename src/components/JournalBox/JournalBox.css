@@ -27,6 +27,14 @@
   }
 }
 
+@media (max-width: 425px) {
+  .journalEntriesContainer {
+    display: grid;
+    place-items: center;
+    gap: 0.2;
+  }
+}
+
 .JournalBox {
   width: 200px;
   height: 290px;

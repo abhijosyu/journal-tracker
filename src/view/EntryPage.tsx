@@ -46,6 +46,13 @@ const EntryPage: React.FC<EntryPageProps> = ({
   currentScreen,
   onAnalyzeButtonClick,
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const [entryTitleCurrent, setEntryTitleCurrent] =
     useState<string>(entryTitle);
 
@@ -101,14 +108,17 @@ const EntryPage: React.FC<EntryPageProps> = ({
           </div>
         </div>
         <div className="entryPage" style={{ height: "100vh", width: "100%" }}>
-          <div className="entryTextContainer">
-            <EntryText
-              setValue={entryTextCurrent}
-              onChange={(e) => {
-                setEntryTextCurrent(e.target.value);
-              }}
-            />
-          </div>
+          {isMobile && chatbotOpen ? null : (
+            <div className="entryTextContainer">
+              <EntryText
+                setValue={entryTextCurrent}
+                onChange={(e) => {
+                  setEntryTextCurrent(e.target.value);
+                }}
+              />
+            </div>
+          )}
+
           {chatbotOpen ? (
             <div className="chatbotContainer">
               <Chatbot

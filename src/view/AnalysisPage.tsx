@@ -44,6 +44,14 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
     (e) => e.date.getMonth() == new Date().getMonth()
   );
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const starFilter = (number: number) => {
     return monthEntries.filter((e) => e.dayRating == number).length;
   };
@@ -78,7 +86,7 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
         borderColor: "#804d6977",
         borderWidth: 1.5,
         borderRadius: 0,
-        radius: 140,
+        radius: isMobile ? 70 : 140,
       },
     ],
   };
@@ -95,13 +103,6 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
       },
     },
   };
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const analysisInfo = () => {
     return (
@@ -115,14 +116,12 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
           <h3> {averageRating}</h3>
           <h1>This Months Ratings: </h1>
 
-          <div
-            className="donutWrapper"
-            style={{ width: "410px", height: "410px" }}
-          >
+          <div className="donutWrapper">
             <Doughnut
               key={JSON.stringify(data)}
               data={data}
               options={options}
+              className="donut"
             />
           </div>
         </SpotlightCard>

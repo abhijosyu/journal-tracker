@@ -11,7 +11,7 @@ interface GradientTextProps {
   colors?: string[];
   animationSpeed?: number;
   showBorder?: boolean;
-  headerClick: () => void;
+  headerClick?: () => void;
 }
 
 export default function GradientText({
@@ -30,7 +30,9 @@ export default function GradientText({
   return (
     <div
       className={`animated-gradient-text ${className}`}
-      onClick={() => headerClick()}
+      onClick={() => {
+        headerClick ? headerClick() : null;
+      }}
     >
       {showBorder && (
         <div className="gradient-overlay" style={gradientStyle}></div>
