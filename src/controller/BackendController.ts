@@ -1,5 +1,5 @@
 import type JournalEntry from "../model/JournalEntry";
-
+// hi
 class BackendController {
   static async getSummary(journalList: JournalEntry[]): Promise<any> {
     const today = new Date();
