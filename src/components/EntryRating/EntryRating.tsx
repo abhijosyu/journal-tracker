@@ -1,6 +1,5 @@
 import "../EntryRating/EntryRating.css";
-import starFilled from "../../../public/Images/StarFilled.png";
-import starUnfilled from "../../../public/Images/StarUnfilled.png";
+
 import StarButton from "./StarButton";
 
 interface EntryRatingProps {

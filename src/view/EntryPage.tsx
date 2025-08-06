@@ -32,7 +32,6 @@ const EntryPage: React.FC<EntryPageProps> = ({
   entryText,
   entryRating,
   entryDate,
-  entrySleep,
   entryTitle,
   onHeaderClick,
   onEntryTitleEdit,

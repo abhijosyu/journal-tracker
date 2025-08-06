@@ -5,11 +5,6 @@
 import React, { useRef } from "react";
 import "./SpotlightCard.css";
 
-interface Position {
-  x: number;
-  y: number;
-}
-
 interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
   spotlightColor?: `rgba(${number}, ${number}, ${number}, ${number})`;
@@ -18,7 +13,7 @@ interface SpotlightCardProps extends React.PropsWithChildren {
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = "",
-  spotlightColor = "rgba(255, 255, 255, 0.25)"
+  spotlightColor = "rgba(255, 255, 255, 0.25)",
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
 

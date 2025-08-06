@@ -1,9 +1,7 @@
-import { SpotLight } from "@react-three/drei";
 import Chatbot from "../components/Chatbot/Chatbot";
 import Header from "../components/Header/Header";
 import type JournalEntry from "../model/JournalEntry";
 import "../view/AnalysisPage.css";
-import { Chart as ChartJS } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import SpotlightCard from "../blocks/Components/SpotlightCard/SpotlightCard";
 

@@ -3,7 +3,6 @@
 */
 
 import "./GradientText.css";
-import React from "react";
 import type { ReactNode } from "react";
 
 interface GradientTextProps {

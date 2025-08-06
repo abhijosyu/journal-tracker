@@ -34,7 +34,6 @@ const ViewDelegator: React.FC<ViewDelegatorProps> = ({
   currentScreen,
   aiSummary,
   entryText,
-  currentJournal,
   onEnterJournal,
   entryRating,
   entryDate,
