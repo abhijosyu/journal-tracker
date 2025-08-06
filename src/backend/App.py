@@ -14,7 +14,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-pro")
 
 @app.route("/api/summarize", methods=["POST"])
 def summarize():
@@ -113,7 +113,7 @@ generally try responding in the tone of the user or whatever you are
 for deleting entries, find the corresponding ID to the title or number the user inputs best, but confirm with the user first by stating the name of
 the entry that would be deleted. look at {previousAIMessages} to check if you had already asked to confirm.
 
-IF THE MESSAGE DOES NOT REQUIRE A TOOL, RESPOND AS NORMAL
+IF THE MESSAGE DOES NOT REQUIRE A TOOL, RESPOND AS NORMAL AND HAVE AN UPBEAT TONE
 
 
 User: {user_message}

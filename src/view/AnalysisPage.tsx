@@ -2,8 +2,11 @@ import Chatbot from "../components/Chatbot/Chatbot";
 import Header from "../components/Header/Header";
 import type JournalEntry from "../model/JournalEntry";
 import "../view/AnalysisPage.css";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import SpotlightCard from "../blocks/Components/SpotlightCard/SpotlightCard";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface AnalysisPageProps {
   onHeaderClick: () => void;
@@ -118,7 +121,11 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
               className="donutWrapper"
               style={{ width: "410px", height: "410px" }}
             >
-              <Doughnut data={data} options={options} />
+              <Doughnut
+                key={JSON.stringify(data)}
+                data={data}
+                options={options}
+              />
             </div>
           </SpotlightCard>
         </div>

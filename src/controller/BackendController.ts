@@ -7,11 +7,14 @@ class BackendController {
       .filter((e) => e.date.getMonth() == today.getMonth())
       .map((e) => e.entry);
     console.log("sending message");
-    const response = await fetch("http://127.0.0.1:5000/api/summarize", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ journalList: journalEntryTexts }),
-    });
+    const response = await fetch(
+      "https://journal-tracker-0xbf.onrender.com/api/summarize",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ journalList: journalEntryTexts }),
+      }
+    );
     console.log("got message: " + response);
 
     if (!response.ok) {
@@ -43,17 +46,20 @@ class BackendController {
 
     try {
       console.log("sending message chat");
-      const response = await fetch("http://127.0.0.1:5000/api/chatting", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: question,
-          tools: toolDescriptions,
-          journalEntries: allEntries,
-          currentJournal: currentJournal,
-          previousMessages: previousMessages,
-        }),
-      });
+      const response = await fetch(
+        "https://journal-tracker-0xbf.onrender.com/api/chatting",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: question,
+            tools: toolDescriptions,
+            journalEntries: allEntries,
+            currentJournal: currentJournal,
+            previousMessages: previousMessages,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`AI request failed with status ${response.status}`);
