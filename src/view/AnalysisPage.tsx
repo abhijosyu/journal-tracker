@@ -5,6 +5,7 @@ import "../view/AnalysisPage.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import SpotlightCard from "../blocks/Components/SpotlightCard/SpotlightCard";
+import { useState, useEffect } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -94,6 +95,40 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
       },
     },
   };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const analysisInfo = () => {
+    return (
+      <div className="analysisInfo cardsFadeIn">
+        <SpotlightCard className="spotlightCard">
+          <h1> Summary:</h1>
+          <p> {analyzeAISummary} </p>
+        </SpotlightCard>
+        <SpotlightCard className="spotlightCard">
+          <h1>Average Rating: </h1>
+          <h3> {averageRating}</h3>
+          <h1>This Months Ratings: </h1>
+
+          <div
+            className="donutWrapper"
+            style={{ width: "410px", height: "410px" }}
+          >
+            <Doughnut
+              key={JSON.stringify(data)}
+              data={data}
+              options={options}
+            />
+          </div>
+        </SpotlightCard>
+      </div>
+    );
+  };
 
   return (
     <div className="AnalysisWrapper">
@@ -107,28 +142,7 @@ const AnalysisPage: React.FC<AnalysisPageProps> = ({
       </div>
 
       <div className="analysisPage">
-        <div className="analysisInfo cardsFadeIn">
-          <SpotlightCard>
-            <h1> Summary:</h1>
-            <p> {analyzeAISummary} </p>
-          </SpotlightCard>
-          <SpotlightCard>
-            <h1>Average Rating: </h1>
-            <h3> {averageRating}</h3>
-            <h1>This Months Ratings: </h1>
-
-            <div
-              className="donutWrapper"
-              style={{ width: "410px", height: "410px" }}
-            >
-              <Doughnut
-                key={JSON.stringify(data)}
-                data={data}
-                options={options}
-              />
-            </div>
-          </SpotlightCard>
-        </div>
+        {isMobile ? (chatbotOpen ? null : analysisInfo()) : analysisInfo()}
 
         {chatbotOpen && (
           <div className="chatbotContainer">

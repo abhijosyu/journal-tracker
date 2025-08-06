@@ -12,8 +12,37 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
+  z-index: 0;
 }
 
+@media (max-width: 768px) {
+  .analysisInfo {
+    display: grid;
+    gap: 1rem;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .analysisPage {
+    width: 100%;
+
+    padding: 0;
+    margin-left: 0;
+  }
+
+  .spotlightCard {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+.spotlightCard {
+  width: 100%;
+  max-width: 500px;
+}
 .donutWrapper {
   margin-top: 0rem;
 }

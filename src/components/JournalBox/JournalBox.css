@@ -11,6 +11,22 @@
   margin-left: 10px;
 }
 
+@media (max-width: 768px) {
+  .journalBox {
+    width: 150px;
+    height: 250px;
+  }
+  .journalEntriesContainer {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2;
+
+    margin-left: 0px;
+  }
+}
+
 .JournalBox {
   width: 200px;
   height: 290px;

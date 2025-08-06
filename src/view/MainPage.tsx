@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Chatbot from "../components/Chatbot/Chatbot";
 import Header from "../components/Header/Header";
 import JournalBox from "../components/JournalBox/JournalBox";
@@ -34,6 +35,13 @@ const MainPage: React.FC<MainPageProps> = ({
   onAnalyzeButtonClick,
 }) => {
   const reversedList = [...journalEntriesList].reverse();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   console.log(reversedList);
   return (
     <div className="MainPageWrapper">
@@ -46,21 +54,26 @@ const MainPage: React.FC<MainPageProps> = ({
         ></Header>
       </div>
       <div className="MainPage" style={{ height: "100vh", width: "100%" }}>
-        <div
-          className="journalEntriesContainer"
-          style={{ width: chatbotOpen ? "75%" : "100%" }}
-        >
-          {reversedList.map((e) => (
-            <JournalBox
-              onClick={onEnterJournal}
-              ID={e.ID}
-              key={e.ID}
-              title={e.title}
-              date={e.date}
-              rating={e.dayRating}
-            ></JournalBox>
-          ))}
-        </div>
+        {isMobile && chatbotOpen ? null : (
+          <div
+            className="journalEntriesContainer"
+            style={{
+              width: chatbotOpen ? "75%" : "100%",
+            }}
+          >
+            {reversedList.map((e) => (
+              <JournalBox
+                onClick={onEnterJournal}
+                ID={e.ID}
+                key={e.ID}
+                title={e.title}
+                date={e.date}
+                rating={e.dayRating}
+              ></JournalBox>
+            ))}
+          </div>
+        )}
+
         {chatbotOpen ? (
           <div className="chatbotContainer">
             <Chatbot

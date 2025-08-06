@@ -14,3 +14,12 @@
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 768px) {
+  .chatbotContainer {
+    width: 100%;
+  }
+  .journalEntriesContainer {
+    width: 20%;
+  }
+}
