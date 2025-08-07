@@ -5,14 +5,7 @@ import {
   signInWithEmailAndPassword,
   type User,
 } from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 import "../Login/Login.css";
@@ -25,8 +18,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
-  const [username, setUsername] = useState("");
-  const [useUsernameLogin, setUseUsernameLogin] = useState(false);
+
   const timeOut = useRef<NodeJS.Timeout | null>(null);
 
   // any messages that appear throughout the log in screen are formatted here
@@ -54,36 +46,12 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
 
   const [message, setMessage] = useState<string | null>(null);
 
-  // checks to make sure a username is unique and not taken
-  async function isUsernameTaken(username: string): Promise<boolean> {
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("username", "==", username));
-    const querySnapshot = await getDocs(q);
-    return !querySnapshot.empty;
-  }
-
-  // gets an email from the username given
-  async function getEmailFromUsername(
-    username: string
-  ): Promise<string | null> {
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("username", "==", username));
-    const snapshot = await getDocs(q);
-    if (!snapshot.empty) {
-      return snapshot.docs[0].data().email;
-    }
-    return null;
-  }
-
   // submits the given log in iformation and makes sure the given information is correct and filled in
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (isSignUp) {
         try {
-          if (username.length == 0) {
-            throw new Error("username cannot be empty");
-          }
           const userInfo = await createUserWithEmailAndPassword(
             auth,
             email,
@@ -92,15 +60,9 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
 
           const user = userInfo.user;
           onAuthSuccess(user);
-          const taken = await isUsernameTaken(username);
-          if (!taken) {
-            await setDoc(doc(db, "users", user.uid), {
-              username: username,
-              email: user.email,
-            });
-          } else {
-            throw new Error("username taken already");
-          }
+          await setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+          });
 
           callMessage("Signed Up");
         } catch (err: any) {
@@ -108,21 +70,6 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
         }
       } else {
         let loginEmail = email;
-
-        if (useUsernameLogin) {
-          if (!username.trim()) {
-            callMessage("Username is required");
-            return;
-          }
-
-          const foundEmail = await getEmailFromUsername(username.trim());
-          if (!foundEmail) {
-            callMessage("No user found with that username");
-            return;
-          }
-
-          loginEmail = foundEmail;
-        }
 
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -157,23 +104,13 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
 
       <form className="sign-in-form" onSubmit={handleSubmit}>
         <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
-        {!useUsernameLogin || isSignUp ? (
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        ) : null}
-        {isSignUp || useUsernameLogin ? (
-          <input
-            className="input"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        ) : null}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
         <input
           type="password"
           placeholder="Password"
@@ -182,16 +119,6 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
         />
 
         <div className="sign-in-buttons">
-          {!isSignUp ? (
-            <button
-              type="button"
-              className="switch-username"
-              onClick={() => setUseUsernameLogin(!useUsernameLogin)}
-            >
-              {useUsernameLogin ? "Use Email Instead" : "Login With Username"}
-            </button>
-          ) : null}
-
           <button type="submit">
             {" "}
             <b>{isSignUp ? "Sign Up" : "Login"}</b>
