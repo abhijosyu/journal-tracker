@@ -16,31 +16,6 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .headerText {
-    transform: scale(0.6);
-
-    margin-top: 5px;
-  }
-  .headerButtonSort {
-    transform: scale(0.8);
-    width: auto;
-    font-size: 20px;
-    padding: 0;
-  }
-  .headerLeft {
-    margin-top: 20px;
-    margin-left: 20px;
-    position: absolute;
-    left: 10%;
-    transform: none;
-  }
-  .headerAiChatbot {
-    background-image: url("/Images/AIButton.png");
-    transform: scale(0.8);
-  }
-}
-
 .headerCenter {
   position: absolute;
   scale: 1;
@@ -49,9 +24,12 @@
 }
 
 .headerRight {
+  display: flex;
+  gap: 1rem;
   margin-top: 10px;
+  place-items: center;
   position: absolute;
-  left: 95%;
+  left: 90%;
   transform: translateX(-50%);
 }
 
@@ -103,30 +81,6 @@
   scale: 1;
 }
 
-.headerButtonFilter {
-  font-size: 18px;
-
-  width: 90px;
-  height: 40px;
-  font-family: "Lexend Deca", sans-serif;
-  color: rgba(57, 42, 115, 0.564);
-  border-radius: 10px;
-  /* From https://css.glass */
-  background: rgba(172, 172, 243, 0.429);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  border: 1px solid rgba(57, 42, 115, 0.3);
-  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
-  transform: translateY() 0.3s ease;
-  scale: 0.95;
-}
-
-.headerButtonFilter:hover {
-  box-shadow: 0 7px 10px rgba(122, 125, 189, 0.531);
-  transform: translateY(-4px);
-  scale: 1;
-}
-
 .headerContainer {
   box-shadow: 10px 0px 2em rgba(7, 23, 60, 0.5);
   /* From https://css.glass */
@@ -160,4 +114,35 @@
 .headerRight button:hover {
   filter: drop-shadow(2px 4px 6px rgb(216, 18, 199));
   scale: 1.1;
+}
+
+@media (max-width: 768px) {
+  .headerText {
+    transform: scale(0.6);
+
+    margin-top: 5px;
+  }
+  .headerButtonSort {
+    transform: scale(0.8);
+    width: auto;
+    font-size: 20px;
+    padding: 0;
+  }
+  .headerLeft {
+    position: absolute;
+    left: 0%;
+    transform: none;
+  }
+  .headerAiChatbot {
+    background-image: url("/Images/AIButton.png");
+    transform: scale(0.8);
+  }
+  .headerRight {
+    display: grid;
+    gap: 0rem;
+    margin-top: 10px;
+    position: absolute;
+    left: 90%;
+    transform: translateX(-50%);
+  }
 }

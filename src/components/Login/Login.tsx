@@ -154,6 +154,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
           MindMeld
         </GradientText>
       </div>
+
       <form className="sign-in-form" onSubmit={handleSubmit}>
         <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
         {!useUsernameLogin || isSignUp ? (

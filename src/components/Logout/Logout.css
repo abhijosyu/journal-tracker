@@ -1,0 +1,24 @@
+.Logout {
+  font-size: 18px;
+
+  width: 90px;
+  height: 40px;
+  font-family: "Lexend Deca", sans-serif;
+  color: rgba(57, 42, 115, 0.564);
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(172, 172, 243, 0.429);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(57, 42, 115, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transform: translateY() 0.3s ease;
+  transform: scale(0.95);
+  transition: filter 0.8s ease, scale 0.3s ease, transform 0.3s ease;
+}
+
+.Logout:hover {
+  filter: drop-shadow(0 7px 10px rgba(122, 125, 189, 0.531)) !important;
+  transform: translateY(-4px);
+  transform: scale(1);
+}

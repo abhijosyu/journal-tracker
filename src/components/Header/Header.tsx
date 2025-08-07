@@ -1,5 +1,6 @@
 import GradientText from "../../blocks/TextAnimations/GradientText/GradientText";
 import "../Header/Header.css";
+import LogoutButton from "../Logout/Logout";
 
 interface HeaderProps {
   onHeaderClick: () => void;
@@ -46,6 +47,8 @@ const Header: React.FC<HeaderProps> = ({
         </GradientText>
       </div>
       <div className="headerRight">
+        <LogoutButton />
+
         <button
           className="headerAiChatbot"
           onClick={() => onChangeChatbot()}
