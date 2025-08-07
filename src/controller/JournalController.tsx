@@ -3,6 +3,11 @@ import JournalCollection from "../model/JournalCollection";
 import BackendController from "../controller/BackendController";
 import JournalEntry from "../model/JournalEntry";
 import ViewDelegator from "../view/ViewDelegator";
+import {
+  LoadAIMessages,
+  LoadEntryList,
+  LoadUserMessages,
+} from "../firebase/JournalLoading";
 
 const JournalController: React.FC = () => {
   const useModel = new JournalCollection();
@@ -31,6 +36,12 @@ const JournalController: React.FC = () => {
 
   useEffect(() => {
     const todayDate = new Date();
+    const loadTasks = async () => {
+      await LoadEntryList(model);
+      await LoadAIMessages(model);
+      await LoadUserMessages(model);
+    };
+    loadTasks();
     if (
       model.JournalList.filter(
         (journal) => journal.date.toDateString() == todayDate.toDateString()

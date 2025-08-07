@@ -1,3 +1,9 @@
+import {
+  addAIMessageToFireBase,
+  addUserMessagesToFireBase,
+  deleteJournalEntryFromFirebase,
+  saveJournalEntryInFirebase,
+} from "../firebase/JournalStorage";
 import Conversation from "./Conversation";
 import JournalEntry from "./JournalEntry";
 
@@ -19,6 +25,7 @@ export default class JournalCollection {
     console.log("in model adding entry: " + entry);
     this.JournalMap.set(entry.ID, entry);
     this.JournalList.push(entry);
+    this.saveEntryToFirebase(entry);
   }
 
   deleteEntry(id: number): void {
@@ -29,10 +36,12 @@ export default class JournalCollection {
 
   addUserMessageToConversation(message: string): void {
     this.AIConversation.addUserMessage(message);
+    this.addUserMessagesToFirebase(this.AIConversation.userMessages);
   }
 
   addAIMessageToConversation(message: string): void {
     this.AIConversation.addAIMessage(message);
+    this.addAIMessagesToFirebase(this.AIConversation.AIMessages);
   }
 
   filterEntries(Date1: Date, Date2?: Date): void {
@@ -58,5 +67,21 @@ export default class JournalCollection {
     };
     const average = sum() / ratings.length;
     return average;
+  }
+
+  async saveEntryToFirebase(entry: JournalEntry): Promise<void> {
+    await saveJournalEntryInFirebase(entry);
+  }
+
+  async deleteEntryFromFirebase(entry: JournalEntry): Promise<void> {
+    await deleteJournalEntryFromFirebase(entry);
+  }
+
+  async addAIMessagesToFirebase(messages: string[]): Promise<void> {
+    await addAIMessageToFireBase(messages);
+  }
+
+  async addUserMessagesToFirebase(messages: string[]): Promise<void> {
+    await addUserMessagesToFireBase(messages);
   }
 }

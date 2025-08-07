@@ -1,6 +1,21 @@
 body {
   font-family: "Lexend Deca", sans-serif;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.controller {
   background-image: url("../public/Images/Grid.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.log-in {
+  background-image: url("../public/Images/LoginBG.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;

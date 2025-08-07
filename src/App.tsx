@@ -16,11 +16,13 @@ function App() {
   return (
     <>
       {user ? (
-        <>
+        <div className="controller">
           <JournalController></JournalController>
-        </>
+        </div>
       ) : (
-        <LoginForm onAuthSuccess={(user) => setUser(user)} />
+        <div className="log-in">
+          <LoginForm onAuthSuccess={(user) => setUser(user)} />
+        </div>
       )}
     </>
   );

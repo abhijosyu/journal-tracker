@@ -9,9 +9,15 @@ export default class Conversation {
 
   addUserMessage(message: string) {
     this.userMessages.push(message);
+    if (this.userMessages.length > 50) {
+      this.userMessages.shift();
+    }
   }
 
   addAIMessage(message: string): void {
     this.AIMessages.push(message);
+    if (this.AIMessages.length > 50) {
+      this.AIMessages.shift();
+    }
   }
 }
