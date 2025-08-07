@@ -9,9 +9,11 @@ export async function LoadEntryList(model: JournalCollection): Promise<void> {
 
   const entryCollection = collection(db, "users", user.uid, "entryList");
   const snapshot = await getDocs(entryCollection);
+  console.log("loading entry list");
 
   snapshot.forEach((entry) => {
     const journal = entry.data();
+    console.log("adding entry: ", journal);
     const AddJournal = new JournalEntry(
       journal.title,
       new Date(journal.date),
@@ -20,6 +22,10 @@ export async function LoadEntryList(model: JournalCollection): Promise<void> {
       journal.entry,
       journal.aiSummary,
       journal.ID
+    );
+    console.log(
+      "is the journal an instance of: ",
+      AddJournal instanceof JournalEntry
     );
     model.addEntry(AddJournal);
   });
@@ -54,7 +60,7 @@ export async function LoadUserMessages(
     const messageString = message.data().message;
 
     if (messageString) {
-      model.addAIMessageToConversation(messageString);
+      model.addUserMessageToConversation(messageString);
     }
   });
 }

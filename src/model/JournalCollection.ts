@@ -21,25 +21,40 @@ export default class JournalCollection {
     this.AIConversation = new Conversation();
   }
 
-  addEntry(entry: JournalEntry): void {
+  async addEntry(entry: JournalEntry): Promise<void> {
     console.log("in model adding entry: " + entry);
+    this.ensureUniqueID(entry);
     this.JournalMap.set(entry.ID, entry);
     this.JournalList.push(entry);
     this.saveEntryToFirebase(entry);
   }
 
-  deleteEntry(id: number): void {
+  ensureUniqueID(entry: JournalEntry): void {
+    const IDList = this.JournalList.map((e) => e.ID);
+    const maxID = IDList.length > 0 ? Math.max(...IDList) : 1;
+    entry.ID = maxID + 1;
+  }
+
+  async deleteEntry(id: number): Promise<void> {
     this.JournalMap.delete(id);
     this.JournalList = this.JournalList.filter((e) => e.ID !== id);
     console.log("after deleting entry: ", this.JournalMap);
   }
 
-  addUserMessageToConversation(message: string): void {
+  async editRating(entry: number, newRating: number) {
+    const exists = this.JournalMap.get(entry);
+    if (exists) {
+      exists.editDayRating(newRating);
+      this.saveEntryToFirebase(exists);
+    }
+  }
+
+  async addUserMessageToConversation(message: string): Promise<void> {
     this.AIConversation.addUserMessage(message);
     this.addUserMessagesToFirebase(this.AIConversation.userMessages);
   }
 
-  addAIMessageToConversation(message: string): void {
+  async addAIMessageToConversation(message: string): Promise<void> {
     this.AIConversation.addAIMessage(message);
     this.addAIMessagesToFirebase(this.AIConversation.AIMessages);
   }

@@ -63,6 +63,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
           await setDoc(doc(db, "users", user.uid), {
             email: user.email,
           });
+          console.log("User added to Firestore"); // ✅
 
           callMessage("Signed Up");
         } catch (err: any) {

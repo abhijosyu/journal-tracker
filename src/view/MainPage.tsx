@@ -37,6 +37,8 @@ const MainPage: React.FC<MainPageProps> = ({
   const reversedList = [...journalEntriesList].reverse();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  console.log("journal entries list regular in mainpage: ", journalEntriesList);
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);

@@ -10,11 +10,11 @@ import {
 } from "../firebase/JournalLoading";
 
 const JournalController: React.FC = () => {
-  const useModel = new JournalCollection();
-  const [model] = useState(useModel);
+  const [model] = useState(() => new JournalCollection());
+
   const [currentScreen, setCurrentScreen] = useState("main"); // main, entry, analysis (always lowercase)
 
-  const [aiMessage, setAiMessage] = useState("...");
+  const [aiMessage, setAiMessage] = useState("");
   const [entryText, setEntryText] = useState("");
   const [entryRating, setEntryRating] = useState<number>(0);
   const [entryDate, setEntryDate] = useState<Date>(new Date());
@@ -36,19 +36,33 @@ const JournalController: React.FC = () => {
 
   useEffect(() => {
     const todayDate = new Date();
+
     const loadTasks = async () => {
-      await LoadEntryList(model);
-      await LoadAIMessages(model);
-      await LoadUserMessages(model);
+      try {
+        await LoadEntryList(model);
+        await LoadAIMessages(model);
+        await LoadUserMessages(model);
+      } catch (err) {
+        console.error("failed to load: ", err);
+        return;
+      }
+
+      console.log("model size after load: ", model.JournalList.length);
+
+      const todayJournalExists = model.JournalList.some(
+        (journal) => journal.date.toDateString() === todayDate.toDateString()
+      );
+
+      console.log("Is today already added?", todayJournalExists);
+
+      if (!todayJournalExists) {
+        addEntry();
+      }
+
+      setJournalEntriesList(model.JournalList);
     };
+
     loadTasks();
-    if (
-      model.JournalList.filter(
-        (journal) => journal.date.toDateString() == todayDate.toDateString()
-      ).length == 0
-    ) {
-      addEntry();
-    }
   }, []);
 
   const changeChatbot = () => {
@@ -217,7 +231,8 @@ const JournalController: React.FC = () => {
       if (rating == model.JournalMap.get(currentJournal)?.dayRating) {
         adjustedRating = rating - 1;
       }
-      model.JournalMap.get(currentJournal)?.editDayRating(adjustedRating);
+      model.editRating(currentJournal, adjustedRating);
+
       setEntryRating(adjustedRating);
       setAnalyzeAverageRating(model.averageRating());
       console.log(model.JournalMap.get(currentJournal)?.dayRating);

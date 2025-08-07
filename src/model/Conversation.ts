@@ -12,6 +12,7 @@ export default class Conversation {
     if (this.userMessages.length > 50) {
       this.userMessages.shift();
     }
+    console.log("UserMessages: ", this.userMessages);
   }
 
   addAIMessage(message: string): void {
@@ -19,5 +20,6 @@ export default class Conversation {
     if (this.AIMessages.length > 50) {
       this.AIMessages.shift();
     }
+    console.log("AIMessages: ", this.AIMessages);
   }
 }
