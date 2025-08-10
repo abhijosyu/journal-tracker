@@ -107,7 +107,7 @@ const EntryPage: React.FC<EntryPageProps> = ({
             ></EntryRating>
           </div>
         </div>
-        <div className="entryPage" style={{ height: "100vh", width: "100%" }}>
+        <div className="entryPage">
           {isMobile && chatbotOpen ? null : (
             <div className="entryTextContainer">
               <EntryText

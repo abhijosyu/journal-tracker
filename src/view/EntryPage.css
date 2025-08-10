@@ -35,13 +35,13 @@
   display: flex;
   flex: 1;
   align-items: flex-start;
-  min-height: calc(100vh - 90px);
+  overflow: hidden;
 }
 
 .entryPageWrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 90px);
   gap: 0rem;
   margin: 0;
   padding: 0;

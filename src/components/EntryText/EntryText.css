@@ -3,10 +3,13 @@
   font-size: 20px;
   background: transparent;
   margin: 0;
-  padding-left: 8px;
-  width: 100%;
+  padding-left: 10px;
+  width: 95%;
   height: 100%;
-  display: inline-table;
+  height: auto;
+  min-height: calc(100vh - 230px);
+  resize: none;
+  overflow: visible;
 }
 
 .entryText:focus {

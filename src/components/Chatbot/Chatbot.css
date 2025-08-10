@@ -1,9 +1,9 @@
 .chatbotContainer {
   position: sticky;
-  top: 25px; /* height of your header */
+  top: 25px;
   height: 100%;
   width: 25%;
-  align-self: flex-start; /* important inside flex layouts */
+  align-self: flex-start;
 }
 
 @keyframes fadeInSide {
@@ -22,9 +22,8 @@
 }
 
 .chatbot {
+  position: static;
   height: calc(100vh - 90px);
-  position: sticky;
-  top: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
