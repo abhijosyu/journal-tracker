@@ -34,7 +34,7 @@ class BackendController {
     question: string,
     journalList: JournalEntry[],
     currentJournal: number,
-    previousMessages: string
+    previousMessages: string[][]
   ): Promise<any> {
     const allEntries = Array.from(journalList).map((entry) => ({
       date: entry.date,

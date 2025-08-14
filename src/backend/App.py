@@ -50,7 +50,7 @@ def chatting():
     tools = data.get("tools", [])
     entries = data.get("journalEntries", [])
     currentEntry = data.get("currentJournal")
-    previousAIMessages = data.get("previousMessages")
+    previousAIMessages = data.get("previousMessages", [])
 
     tool_prompt = "\n".join([
         f"Tool: {t['function']}\nDescription: {t['description']}\nParameters: {json.dumps(t['parameters'])}"
@@ -103,15 +103,19 @@ if a user asks to change the entry text or the entry rating and currentEntry is 
 
 if the user asks for a rating of the entry, you can rate from 1 - 5 with 1 being the worst and 5 being the best, and can use the tool to return the rating. 
 
-in case you are unclear on what the user is saying / responding to, i provided a log of your previous message {previousAIMessages}, which may help
 
-
-if the user's message is not clear to understand, explain that you do not understand what the user is saying.
 
 generally try responding in the tone of the user or whatever you are
 
 for deleting entries, find the corresponding ID to the title or number the user inputs best, but confirm with the user first by stating the name of
 the entry that would be deleted. look at {previousAIMessages} to check if you had already asked to confirm.
+
+in case you are unclear on what the user is saying / responding to, i provided a log of your previous message {previousAIMessages}, which may help. if the
+user's message can be answered without referring to previous messages, then use that 
+
+if the user's message is not clear to understand, explain that you do not understand what the user is saying.
+
+
 
 IF THE MESSAGE DOES NOT REQUIRE A TOOL, RESPOND AS NORMAL AND HAVE AN UPBEAT TONE
 

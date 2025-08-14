@@ -36,8 +36,12 @@ export default class JournalCollection {
   }
 
   async deleteEntry(id: number): Promise<void> {
+    const journal: JournalEntry | undefined = this.JournalMap.get(id);
     this.JournalMap.delete(id);
     this.JournalList = this.JournalList.filter((e) => e.ID !== id);
+    if (journal) {
+      this.deleteEntryFromFirebase(journal);
+    }
     console.log("after deleting entry: ", this.JournalMap);
   }
 
@@ -51,12 +55,18 @@ export default class JournalCollection {
 
   async addUserMessageToConversation(message: string): Promise<void> {
     this.AIConversation.addUserMessage(message);
-    this.addUserMessagesToFirebase(this.AIConversation.userMessages);
+    this.addUserMessagesToFirebase(
+      message,
+      this.AIConversation.userMessages.length
+    );
   }
 
   async addAIMessageToConversation(message: string): Promise<void> {
     this.AIConversation.addAIMessage(message);
-    this.addAIMessagesToFirebase(this.AIConversation.AIMessages);
+    this.addAIMessagesToFirebase(
+      message,
+      this.AIConversation.AIMessages.length
+    );
   }
 
   filterEntries(Date1: Date, Date2?: Date): void {
@@ -92,11 +102,11 @@ export default class JournalCollection {
     await deleteJournalEntryFromFirebase(entry);
   }
 
-  async addAIMessagesToFirebase(messages: string[]): Promise<void> {
-    await addAIMessageToFireBase(messages);
+  async addAIMessagesToFirebase(messages: string, id: number): Promise<void> {
+    await addAIMessageToFireBase(messages, id);
   }
 
-  async addUserMessagesToFirebase(messages: string[]): Promise<void> {
-    await addUserMessagesToFireBase(messages);
+  async addUserMessagesToFirebase(messages: string, id: number): Promise<void> {
+    await addUserMessagesToFireBase(messages, id);
   }
 }

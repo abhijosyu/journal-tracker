@@ -8,6 +8,7 @@ import {
   LoadEntryList,
   LoadUserMessages,
 } from "../firebase/JournalLoading";
+import { interleave } from "../Utils";
 
 const JournalController: React.FC = () => {
   const [model] = useState(() => new JournalCollection());
@@ -42,6 +43,7 @@ const JournalController: React.FC = () => {
         await LoadEntryList(model);
         await LoadAIMessages(model);
         await LoadUserMessages(model);
+        setAnalyzeAverageRating(model.averageRating());
       } catch (err) {
         console.error("failed to load: ", err);
         return;
@@ -95,7 +97,10 @@ const JournalController: React.FC = () => {
         question,
         model.JournalList,
         currentJournal,
-        model.AIConversation.AIMessages[model.AIConversation.AIMessages.length]
+        interleave(
+          model.AIConversation.userMessages,
+          model.AIConversation.AIMessages
+        )
       );
       console.log("got the message in journalcontroller: ", response);
       console.log("response type: ", response.type);
@@ -277,7 +282,6 @@ const JournalController: React.FC = () => {
     const journal = model.JournalMap.get(ID);
     try {
       if (journal) {
-        setAiMessage(journal.aiSummary);
         setEntryText(journal.entry);
         setCurrentJournal(journal.ID);
         setEntryRating(journal.dayRating);

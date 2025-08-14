@@ -33,27 +33,26 @@ export async function deleteJournalEntryFromFirebase(entry: JournalEntry) {
   }
 }
 
-export async function addAIMessageToFireBase(AIMessages: string[]) {
+export async function addAIMessageToFireBase(AIMessage: string, ID: number) {
   const user = auth.currentUser;
   if (!user) return;
 
-  for (let i = 0; i < AIMessages.length; i++) {
-    const message = AIMessages[i];
-    await setDoc(doc(db, "users", user.uid, "AIChatMessages", i.toString()), {
-      message: message,
-    });
-  }
+  const id = ID.toString().padStart(3, "0");
+  await setDoc(doc(db, "users", user.uid, "AIChatMessages", id), {
+    message: AIMessage,
+  });
 }
 
-export async function addUserMessagesToFireBase(UserMessages: string[]) {
+export async function addUserMessagesToFireBase(
+  UserMessage: string,
+  ID: number
+) {
   const user = auth.currentUser;
   if (!user) return;
 
-  for (let i = 0; i < UserMessages.length; i++) {
-    const message = UserMessages[i];
+  const id = ID.toString().padStart(3, "0");
 
-    await setDoc(doc(db, "users", user.uid, "UserChatMessages", i.toString()), {
-      message: message,
-    });
-  }
+  await setDoc(doc(db, "users", user.uid, "UserChatMessages", id), {
+    message: UserMessage,
+  });
 }

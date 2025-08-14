@@ -1,13 +1,17 @@
+/**
+ * represents a class for a journal entry, which is an entry with a date, title, and actual text for a user to talk about, followed by a
+ * rating that a user can rate their entry.
+ */
 export default class JournalEntry {
   static nextID = 1;
 
-  title: string;
-  date: Date;
+  title: string; // title of the entry
+  date: Date; // date of the entry
   dayRating: number; // 1 - 5
-  sleep: number; // in minutes
-  entry: string;
-  aiSummary: string;
-  ID: number;
+  sleep: number; // in minutes (not implemented)
+  entry: string; // actual text of the entry
+  aiSummary: string; // ai summary of entry (not implemented for rate limit)
+  ID: number; // id of the entry for identification
 
   constructor(
     title?: string,

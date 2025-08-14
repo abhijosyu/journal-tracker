@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../Chatbot/Chatbot.css";
+import { interleave } from "../../Utils";
 
 interface ChatbotProps {
   userMessages: string[];
@@ -18,18 +19,6 @@ const Chatbot: React.FC<ChatbotProps> = ({
 }) => {
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const interleave = (list1: string[], list2: string[]) => {
-    const result = [];
-    const maxLength = Math.max(list1.length, list2.length);
-
-    for (let i = 0; i < maxLength; i++) {
-      if (i < list1.length) result.push(list1[i]);
-      if (i < list2.length) result.push(list2[i]);
-    }
-
-    return result;
-  };
-
   const [message, setMessage] = useState<string>("");
 
   const combinedMessages = interleave(userMessages, AIMessages);
@@ -45,10 +34,15 @@ const Chatbot: React.FC<ChatbotProps> = ({
       <div className="chatbot animateFadeInSide">
         <div className="chatbotMessages" ref={messagesContainerRef}>
           {combinedMessages.length > 0 ? (
-            combinedMessages.map((e, i) => (
-              <p key={i} className={i % 2 == 0 ? "userMessage" : "AIMessage"}>
+            combinedMessages.map(([e, source], i) => (
+              <p
+                key={i}
+                className={source == "user" ? "userMessage" : "AIMessage"}
+              >
                 <span
-                  className={i % 2 == 0 ? "userMessageSpan" : "AIMessageSpan"}
+                  className={
+                    source == "user" ? "userMessageSpan" : "AIMessageSpan"
+                  }
                 >
                   {e == "" ? "empty" : e}
                 </span>
