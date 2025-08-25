@@ -85,7 +85,9 @@ const EntryPage: React.FC<EntryPageProps> = ({
 
   useEffect(() => {
     console.log("changing the text");
-    setIsEntryTextUpdatedCurrent(false);
+    entryTextCurrent == entryText
+      ? setIsEntryTextUpdatedCurrent(true)
+      : setIsEntryTextUpdatedCurrent(false);
   }, [entryTextCurrent]);
 
   console.log(
