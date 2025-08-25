@@ -3,9 +3,9 @@ import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import type JournalEntry from "../model/JournalEntry";
 
 /**
- * 
- * @param entry 
- * @returns 
+ *
+ * @param entry
+ * @returns
  */
 export async function saveJournalEntryInFirebase(entry: JournalEntry) {
   const user = auth.currentUser;

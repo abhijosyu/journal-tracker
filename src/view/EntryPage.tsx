@@ -1,6 +1,7 @@
 import Chatbot from "../components/Chatbot/Chatbot";
 import EntryRating from "../components/EntryRating/EntryRating";
 import EntryText from "../components/EntryText/EntryText";
+import EntryTextButton from "../components/EntryTextButton/EntryTextButton";
 import EntryTitle from "../components/EntryTitle/EntryTitle";
 import Header from "../components/Header/Header";
 import "../view/EntryPage.css";
@@ -66,10 +67,16 @@ const EntryPage: React.FC<EntryPageProps> = ({
 
   const [entryTextCurrent, setEntryTextCurrent] = useState<string>(entryText);
 
-  useEffect(() => {
+  const isUpdated = entryText == entryTextCurrent;
+
+  const [isEntryTextUpdatedCurrent, setIsEntryTextUpdatedCurrent] =
+    useState<boolean>(isUpdated);
+
+  const changeEntryText = (): void => {
     console.log("changing the text");
     onEntryTextEdit(entryTextCurrent);
-  }, [entryTextCurrent]);
+    setIsEntryTextUpdatedCurrent(true);
+  };
 
   useEffect(() => {
     console.log("changing the text");
@@ -78,17 +85,26 @@ const EntryPage: React.FC<EntryPageProps> = ({
 
   useEffect(() => {
     console.log("changing the text");
-    setEntryTextCurrent(entryText);
-  }, [entryText]);
+    setIsEntryTextUpdatedCurrent(false);
+  }, [entryTextCurrent]);
+
+  console.log(
+    "in entrypage checking if the entrytext is updated ",
+    isEntryTextUpdatedCurrent
+  );
 
   return (
     <div className="entryPageWrapper">
       <div className="headerContainer">
         <Header
-          onHeaderClick={onHeaderClick}
+          onHeaderClick={() => {
+            onHeaderClick(), changeEntryText();
+          }}
           onChangeChatbot={onChangeChatbot}
           screen={currentScreen}
           onAnalyzeButtonClick={onAnalyzeButtonClick}
+          isEntryTextUpdated={isEntryTextUpdatedCurrent}
+          onClick={changeEntryText}
         ></Header>
       </div>
       <div className="entryContainer">

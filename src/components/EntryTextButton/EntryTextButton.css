@@ -1,0 +1,61 @@
+.updatedButton {
+  font-size: 13px;
+
+  width: 90px;
+  height: 40px;
+  font-family: "Lexend Deca", sans-serif;
+  color: rgba(104, 73, 102, 0.564);
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(236, 210, 226, 0.429);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(139, 111, 128, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transform: translateY() 0.3s ease;
+  transform: scale(0.95);
+  transition: filter 0.8s ease, scale 0.3s ease, transform 0.3s ease;
+}
+
+.notUpdatedButton {
+  font-size: 13px;
+
+  width: 90px;
+  height: 40px;
+  font-family: "Lexend Deca", sans-serif;
+  color: rgba(85, 14, 81, 0.564);
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(243, 172, 216, 0.429);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(124, 28, 84, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transform: translateY() 0.3s ease;
+  transform: scale(0.95);
+  transition: filter 0.8s ease, scale 0.3s ease, transform 0.3s ease;
+}
+
+.notUpdatedButton:hover {
+  filter: drop-shadow(0 7px 10px rgba(122, 125, 189, 0.531)) !important;
+  transform: translateY(-4px);
+  transform: scale(1);
+}
+
+@media (max-width: 768px) {
+  .notUpdatedButton {
+    transform: scale(0.8);
+  }
+  .updatedButton {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 425px) {
+  .notUpdatedButton {
+    transform: scale(0.7);
+  }
+  .updatedButton {
+    transform: scale(0.7);
+  }
+}

@@ -1,12 +1,15 @@
 import GradientText from "../../blocks/TextAnimations/GradientText/GradientText";
 import "../Header/Header.css";
 import LogoutButton from "../Logout/Logout";
+import EntryTextButton from "../EntryTextButton/EntryTextButton";
 
 interface HeaderProps {
   onHeaderClick: () => void;
   onChangeChatbot: () => void;
   screen: string;
   onAnalyzeButtonClick: () => void;
+  isEntryTextUpdated: boolean;
+  onClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -14,6 +17,8 @@ const Header: React.FC<HeaderProps> = ({
   onChangeChatbot,
   screen,
   onAnalyzeButtonClick,
+  isEntryTextUpdated,
+  onClick,
 }) => {
   return (
     <>
@@ -27,6 +32,11 @@ const Header: React.FC<HeaderProps> = ({
               Analyze
             </button>
           </div>
+        ) : screen == "entry" ? (
+          <EntryTextButton
+            isEntryTextUpdated={isEntryTextUpdated}
+            onClick={onClick}
+          ></EntryTextButton>
         ) : null}
       </div>
       <div className="headerCenter">
