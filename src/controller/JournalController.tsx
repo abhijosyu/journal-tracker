@@ -222,7 +222,7 @@ const JournalController: React.FC = () => {
   const changeEntryText = (text: string) => {
     console.log("ive been called to change the entry text with text: " + text);
     try {
-      model.JournalMap.get(currentJournal)?.editEntry(text);
+      model.editEntryText(currentJournal, text);
       setEntryText(text);
       console.log(model.JournalMap.get(currentJournal)?.entry);
     } catch (e) {

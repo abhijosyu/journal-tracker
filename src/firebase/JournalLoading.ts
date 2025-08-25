@@ -3,18 +3,21 @@ import { collection, getDocs } from "firebase/firestore";
 import type JournalCollection from "../model/JournalCollection";
 import JournalEntry from "../model/JournalEntry";
 
+/**
+ * loads the entries in the saved list
+ * @param model the journal collection model to load to
+ * @returns void
+ */
 export async function LoadEntryList(model: JournalCollection): Promise<void> {
-  const user = auth.currentUser;
+  const user = auth.currentUser; // the current user
   if (!user) return;
 
-  const entryCollection = collection(db, "users", user.uid, "entryList");
-  const snapshot = await getDocs(entryCollection);
-  console.log("loading entry list");
+  const entryCollection = collection(db, "users", user.uid, "entryList"); // the collection of the entries
+  const snapshot = await getDocs(entryCollection); // gets the docs of the entry collection
 
   snapshot.forEach((entry) => {
-    const journal = entry.data();
-    console.log("adding entry: ", journal);
-    const AddJournal = new JournalEntry(
+    const journal = entry.data(); // gets the data for each entry item
+    const AddJournal = new JournalEntry( // constructs the entry
       journal.title,
       new Date(journal.date),
       journal.rating,
@@ -23,14 +26,16 @@ export async function LoadEntryList(model: JournalCollection): Promise<void> {
       journal.aiSummary,
       journal.ID
     );
-    console.log(
-      "is the journal an instance of: ",
-      AddJournal instanceof JournalEntry
-    );
-    model.addEntry(AddJournal);
+
+    model.addEntry(AddJournal); // adds the entry to the journal collection
   });
 }
 
+/**
+ * loads the AI messages into the model
+ * @param model the model to load messages into
+ * @returns void
+ */
 export async function LoadAIMessages(model: JournalCollection): Promise<void> {
   const user = auth.currentUser;
   if (!user) return;
@@ -47,6 +52,11 @@ export async function LoadAIMessages(model: JournalCollection): Promise<void> {
   });
 }
 
+/**
+ * loads the user messages into the model
+ * @param model the user messages
+ * @returns void
+ */
 export async function LoadUserMessages(
   model: JournalCollection
 ): Promise<void> {
