@@ -8,8 +8,8 @@ interface HeaderProps {
   onChangeChatbot: () => void;
   screen: string;
   onAnalyzeButtonClick: () => void;
-  isEntryTextUpdated: boolean;
-  onClick: () => void;
+  isEntryTextUpdated?: boolean;
+  onClick?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,6 +20,9 @@ const Header: React.FC<HeaderProps> = ({
   isEntryTextUpdated,
   onClick,
 }) => {
+  const onClickSub = () => {
+    return null;
+  };
   return (
     <>
       <div className="headerLeft headerFadeInSide">
@@ -34,8 +37,8 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         ) : screen == "entry" ? (
           <EntryTextButton
-            isEntryTextUpdated={isEntryTextUpdated}
-            onClick={onClick}
+            isEntryTextUpdated={isEntryTextUpdated || true}
+            onClick={onClick || onClickSub}
           ></EntryTextButton>
         ) : null}
       </div>

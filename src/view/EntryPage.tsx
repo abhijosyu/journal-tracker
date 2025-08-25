@@ -1,7 +1,6 @@
 import Chatbot from "../components/Chatbot/Chatbot";
 import EntryRating from "../components/EntryRating/EntryRating";
 import EntryText from "../components/EntryText/EntryText";
-import EntryTextButton from "../components/EntryTextButton/EntryTextButton";
 import EntryTitle from "../components/EntryTitle/EntryTitle";
 import Header from "../components/Header/Header";
 import "../view/EntryPage.css";
