@@ -37,7 +37,9 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         ) : screen == "entry" ? (
           <EntryTextButton
-            isEntryTextUpdated={isEntryTextUpdated || true}
+            isEntryTextUpdated={
+              isEntryTextUpdated != undefined ? isEntryTextUpdated : true
+            }
             onClick={onClick || onClickSub}
           ></EntryTextButton>
         ) : null}
