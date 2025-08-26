@@ -85,8 +85,8 @@ def chatting():
     a user has to be inside of an entry. 
     if the user asks for a rating of the entry, you can rate from 1 - 5 with 1 being the worst and 5 being the best,
     and can use the tool to return the rating. 
-    generally try responding in the tone of the user for deleting entries, find the corresponding ID to the title or 
-    number the user inputs best, but confirm with the user first by stating the name of the entry that would be deleted.
+    generally try responding in the tone of the user.
+    for deleting entries, find the corresponding ID to the title or number the user inputs best.
     look at {previousAIMessages} to check if you had already asked to confirm. in case you are unclear on what the user is saying / responding to, 
     i provided a log of your previous message {previousAIMessages}, which may help. 
     if the user's message can be answered without referring to previous messages, then use that if the user's message is not clear to understand, 

@@ -268,6 +268,7 @@ const JournalController: React.FC = () => {
     console.log("found journal: ", journal);
     try {
       if (journal) {
+        console.log("found the journal");
         if (currentJournal == journal.ID) {
           goToMainPage();
         }
