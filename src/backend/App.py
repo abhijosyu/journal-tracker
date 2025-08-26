@@ -72,11 +72,10 @@ def chatting():
     Here are the available tools: {tool_prompt} 
     If the user's message **clearly matches a tool use case** **RESPOND ONLY WITH A JSON OBJECT in the format:**
      
-       {
-        { "function": "function_name", 
-          "parameters": {{ ... }} 
-        }
-        } 
+       {{ 
+        "function": "function_name", 
+        "parameters": {{ ... }} 
+       }} 
     
     If no tool is needed, respond with a regular helpful message. 
     typically, if a user asks "what" or "how many" a tool is not needed and requires the data provided in allJournalEntries.
