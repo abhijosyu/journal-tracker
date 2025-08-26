@@ -93,7 +93,7 @@ def chatting():
     if the user's message can be answered without referring to previous messages, then use that.
      
       
-    If no tool is needed, respond with a regular helpful message. 
+    If no tool is needed, respond as normal with a regular message and use a **FRIENDLY** tone. 
     if the user's message is not clear to understand, explain that you do not understand what the user is saying.
     
     
