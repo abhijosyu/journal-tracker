@@ -63,52 +63,60 @@ def chatting():
 
     full_prompt = f"""
 
-    
 You are an AI assistant that can call tools if needed.
 
+Today's date is {date.today()} and tomorrow is {date.today() + timedelta(days=1)}. 
+You may add or subtract days from today to come up with dates.
+
+You are given all of the journal entries and their information here:
+{allJournalEntries}
+
+The current journal entry the user is looking at is {currentEntry}. 
+Match this number to the ID of allJournalEntries to find the current journal entry. 
+If currentEntry is 0, the user is not inside of a journal entry.
 
 Here are the available tools:
-
 {tool_prompt}
 
-If the user's message **clearly matches a tool use case**
+---
 
+### Output format (VERY IMPORTANT):
+You **must ALWAYS return valid JSON**. 
+Never return plain text. Never include explanations, backticks, or code fences.  
 
-**  RESPOND ONLY WITH A JSON OBJECT in the format:  **
+There are only two allowed response shapes:
+
+1. **If you are calling a tool:**
 {{
+  "type": "tool",
   "function": "function_name",
   "parameters": {{ ... }}
 }}
 
-keep in mind that todays date is {date.today()} and tomorrow is {date.today() + timedelta(days=1)}, you can add or subtract days from today 
-to come up with the date 
+2. **If no tool is needed (normal helpful message):**
+{{
+  "type": "message",
+  "message": "your helpful text here"
+}}
 
-Additionally, i have given all of the information regarding all of the journal entries and their information, so you can access them via:
+---
 
-{allJournalEntries}
+### Guidance
+- If the user's message clearly matches a tool use case → use format (1).
+- Otherwise, respond normally with format (2).
+- If the user asks to change the entry text or entry rating but currentEntry == 0 → respond with (2) and tell them they must be inside an entry.
+- If the user asks for a rating of the entry, you can generate a number 1–5 and use a tool to return the rating.
+- For deleting entries: find the ID/title that matches best, but **confirm first** by sending back format (2) asking for confirmation. 
+  (Check {previousAIMessages} to see if you already asked.)
+- If unclear what the user means, respond with (2) saying you don’t understand.
+- “What”/“How many” type questions usually → format (2), answered from {allJournalEntries}, not tools.
+- Use a friendly tone consistent with the user’s message.
 
-
-the current journal entry the user is looking at is given by the number {currentEntry}. match the number here to the ID of allJournalEntries to find
-the current journal entry the user is on. However, if currentEntry is 0, then the user is not inside of a journal entry.
-
-If no tool is needed, respond with a regular helpful message.
-
-
-NOT ALL RESPONSES REQUIRE THESE TOOLS. if the question can be answered without a tool, answer without a tool first. 
-
-if a user asks to change the entry text or the entry rating and currentEntry is 0, then do not call on any tools and specify that a user has to be inside of an entry.
-
-for deleting entries, find the corresponding ID to the title or number the user inputs best. 
-look at {previousAIMessages} to check if you had already asked to confirm.
-
-in case you are unclear on what the user is saying / responding to, i provided a log of your previous message {previousAIMessages}, which may help. if the
-user's message can be answered without referring to previous messages, then use that 
-
-if the user's message is not clear to understand, explain that you do not understand what the user is saying.
-
+---
 
 User: {user_message}
 """
+
 
     response = model.generate_content(full_prompt)
     
