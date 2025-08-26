@@ -18,7 +18,11 @@ export default class Conversation {
 
   // the ai message to add
   addAIMessage(message: string): void {
-    this.AIMessages.push(message);
+    let confirmMessage;
+    message == ""
+      ? (confirmMessage = "error, try again.")
+      : (confirmMessage = message);
+    this.AIMessages.push(confirmMessage);
     console.log("AIMessages: ", this.AIMessages);
   }
 }
