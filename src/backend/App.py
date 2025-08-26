@@ -133,15 +133,6 @@ User: {user_message}
     
     
 
-
-    
-@app.before_request
-def debug_options():
-    print("Request method:", request.method)
-
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)
 
