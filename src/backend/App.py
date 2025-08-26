@@ -88,9 +88,13 @@ def chatting():
     generally try responding in the tone of the user.
     for deleting entries, find the corresponding ID to the title or number the user inputs best.
     look at {previousAIMessages} to check if you had already asked to confirm. in case you are unclear on what the user is saying / responding to, 
-    i provided a log of your previous message {previousAIMessages}, which may help. 
-    if the user's message can be answered without referring to previous messages, then use that if the user's message is not clear to understand, 
-    explain that you do not understand what the user is saying. 
+    i provided a log of your previous message {previousAIMessages}, which may help.
+
+    if the user's message can be answered without referring to previous messages, then use that.
+     
+      
+    If no tool is needed, respond with a regular helpful message. 
+    if the user's message is not clear to understand, explain that you do not understand what the user is saying.
     
     
     User: {user_message} """
