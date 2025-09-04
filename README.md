@@ -1,6 +1,6 @@
 # [Journal Tracker](https://journal-tracker-aa814.web.app/)
 
-# [Read Full Documentation Here (WIP)] (https://holistic-pear-355.notion.site/MindMeld-26479801a76e803bbe9ccceea0742968?source=copy_link)
+# [Read Full Documentation Here (WIP)](https://holistic-pear-355.notion.site/MindMeld-26479801a76e803bbe9ccceea0742968?source=copy_link)
 
 A website that analyzes your journal entries through conversing with AI, displaying summaries and other information surrounding the content in your entries.
 
